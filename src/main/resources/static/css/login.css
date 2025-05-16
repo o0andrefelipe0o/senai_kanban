@@ -1,0 +1,24 @@
+footer {
+    background: red;
+    color: black; /* Define a cor do texto como preto. */
+    padding: 10px; /* Adiciona um preenchimento de 10 pixels em todos os lados. */
+    text-align: center; /* Centraliza o texto dentro do rodapé. */
+    width: 100%; /* Ocupa toda a largura disponível. */
+    font-weight: 700; /* Define a espessura da fonte como negrito. */
+}
+.form-label {
+    font-size: 20px;
+    font-weight: 600;
+}
+.botaoEnvia {
+        background-color:red !important;
+        border-color: rgb(0, 0, 0) !important;
+        color: #000 !important; /* Deixa o texto mais visível com fundo amarelo */
+        font-weight: 600 !important;
+        margin: 0 auto !important;
+        display: block !important;
+        width: 200px !important;
+}
+.botaoEnvia:hover {
+    background-color: rgb(255, 255, 255)!important;
+}
