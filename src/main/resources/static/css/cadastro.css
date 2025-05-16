@@ -10,7 +10,7 @@ footer {
     font-size: 20px;
     font-weight: 600;
 }
-.botaoEnvia {
+.botaoCadastrar {
         background-color:red !important;
         border-color: rgb(0, 0, 0) !important;
         color: #000 !important;
@@ -19,6 +19,6 @@ footer {
         display: block !important;
         width: 200px !important;
 }
-.botaoEnvia:hover {
+.botaoCadastrar:hover {
     background-color: rgb(255, 255, 255)!important;
 }
