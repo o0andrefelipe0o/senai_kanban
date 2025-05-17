@@ -13,7 +13,7 @@ footer {
 .botaoEnvia {
         background-color:red !important;
         border-color: rgb(0, 0, 0) !important;
-        color: #000 !important; /* Deixa o texto mais visível com fundo amarelo */
+        color: #000 !important;
         font-weight: 600 !important;
         margin: 0 auto !important;
         display: block !important;
