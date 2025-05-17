@@ -8,25 +8,36 @@ function drop(ev) {
   ev.preventDefault();
   const data = ev.dataTransfer.getData("text");
   const task = document.getElementById(data);
-  ev.target.closest('.column').appendChild(task);
+  const column = ev.target.closest('.column');
+
+  if (task && column) {
+    column.appendChild(task);
+
+    const taskId = task.id.replace("task", "");
+    let destino = column.id; // todo, in-progress, done
+
+    fetch(`/kanban/mover/${taskId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: "para=" + destino
+    });
+  }
 }
 let taskCount = 3;
 function createTask() {
   const input = document.getElementById("taskInput");
   const text = input.value.trim();
   if (text === "") return;
-  const formattedText = text.replace(/\n/g, "<br>");
-  const task = document.createElement("div");
-  task.className = "task";
-  task.id = `task${taskCount++}`;
-  task.draggable = true;
-  task.ondragstart = drag;
-  task.ondblclick = () => enableEditing(task);
-  task.innerHTML = `
-    <span class="task-text">${formattedText}</span>
-  `;
-  document.getElementById("todo").appendChild(task);
-  input.value = "";
+
+  fetch("/kanban/tarefa", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: "titulo=" + encodeURIComponent(text)
+  }).then(() => location.reload());
 }
 function enableEditing(taskElement) {
     const taskTextElement = taskElement.querySelector('.task-text');
@@ -50,7 +61,10 @@ function enableEditing(taskElement) {
     deleteButton.className = "edit-button edit-delete";
     deleteButton.textContent = "Excluir";
     deleteButton.onclick = () => {
-        taskElement.remove();
+        const taskId = taskElement.id.replace("task", "");
+        fetch(`/kanban/excluir/${taskId}`, { method: "POST" }).then(() => {
+            taskElement.remove();
+        });
     };
 
     // Botão Cancelar
@@ -96,18 +110,23 @@ function restoreTaskFunctionality(taskElement) {
     taskElement.ondblclick = () => enableEditing(taskElement);
 }
 function saveEditedTask(taskElement, text) {
-    const formattedText = text.trim().replace(/\n/g, "<br>");
-    if (formattedText === "") {
-        taskElement.remove();
-        return;
-    }
-    taskElement.innerHTML = `
-        <span class="task-text">${formattedText}</span>
-    `;
+  const formattedText = text.trim().replace(/\n/g, "<br>");
+  const taskId = taskElement.id.replace("task", "");
+
+  if (formattedText === "") {
+    // excluir
+    fetch(`/kanban/excluir/${taskId}`, { method: "POST" }).then(() => {
+      taskElement.remove();
+    });
+    return;
+  }
+
+  fetch(`/kanban/editar/${taskId}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: "titulo=" + encodeURIComponent(formattedText)
+  }).then(() => {
+    taskElement.innerHTML = `<span class="task-text">${formattedText}</span>`;
     restoreTaskFunctionality(taskElement);
-}
-function restoreTaskFunctionality(taskElement) {
-    taskElement.draggable = true;
-    taskElement.ondragstart = drag;
-    taskElement.ondblclick = () => enableEditing(taskElement);
+  });
 }

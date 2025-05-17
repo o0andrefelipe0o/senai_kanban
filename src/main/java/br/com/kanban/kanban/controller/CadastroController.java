@@ -34,7 +34,7 @@ public class CadastroController {
         // 3. Cria o objeto Usuario com os dados do DTO
         Usuario usuario = new Usuario();
         usuario.setUsuario(usuarioDTO.getUsuario());
-        usuario.setSenha(usuarioDTO.getSenha()); // Recomendado: criptografar a senha
+        usuario.setSenha(usuarioDTO.getSenha()); // Alerta: criptografar a senha
 
         usuarioRepository.save(usuario);
         return "redirect:/";

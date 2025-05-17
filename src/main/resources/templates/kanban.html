@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Quadro Kanban</title>
 </head>
 <body>
 
@@ -24,14 +24,52 @@
     <button onclick="createTask()" id="botaoTarefa">Criar Tarefa</button>
 </div>
 <div class="kanban-board">
+    <!-- Coluna "A Fazer" -->
     <div class="column" id="todo" ondrop="drop(event)" ondragover="allowDrop(event)">
         <h2>A Fazer</h2>
+        <div class="task-container">
+            <div th:each="tarefa : ${tarefas}"
+                 th:if="${tarefa.aFazer}"
+                 th:id="'task' + ${tarefa.id}"
+                 class="task"
+                 draggable="true"
+                 ondblclick="enableEditing(this)"
+                 ondragstart="drag(event)">
+                <span class="task-text" th:utext="${tarefa.titulo}"></span>
+            </div>
+        </div>
     </div>
+
+    <!-- Coluna "Fazendo" -->
     <div class="column" id="in-progress" ondrop="drop(event)" ondragover="allowDrop(event)">
-        <h2>Em Progresso</h2>
+        <h2>Fazendo</h2>
+        <div class="task-container">
+            <div th:each="tarefa : ${tarefas}"
+                 th:if="${tarefa.fazendo}"
+                 th:id="'task' + ${tarefa.id}"
+                 class="task"
+                 draggable="true"
+                 ondblclick="enableEditing(this)"
+                 ondragstart="drag(event)">
+                <span class="task-text" th:utext="${tarefa.titulo}"></span>
+            </div>
+        </div>
     </div>
+
+    <!-- Coluna "Feito" -->
     <div class="column" id="done" ondrop="drop(event)" ondragover="allowDrop(event)">
-        <h2>Concluído</h2>
+        <h2>Feito</h2>
+        <div class="task-container">
+            <div th:each="tarefa : ${tarefas}"
+                 th:if="${tarefa.feito}"
+                 th:id="'task' + ${tarefa.id}"
+                 class="task"
+                 draggable="true"
+                 ondblclick="enableEditing(this)"
+                 ondragstart="drag(event)">
+                <span class="task-text" th:utext="${tarefa.titulo}"></span>
+            </div>
+        </div>
     </div>
 </div>
 <br>
