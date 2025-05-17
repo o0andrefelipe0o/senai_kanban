@@ -1,0 +1,129 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #ffffff; /* Fundo branco para a página */
+    flex: 1;
+
+}
+h1 {
+    text-align: center;
+}
+.kanban-board {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+.column {
+    background-color: #ffffff; /* Fundo branco para as colunas */
+    padding: 15px;
+    width: 30%;
+    border-radius: 5px;
+    min-height: 300px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombras leves para as colunas */
+    border: 1px solid black; /* Margem fina preta ao redor de cada coluna */
+}
+.column h2 {
+    text-align: center;
+}
+.task {
+    background-color: #ffffff; /* Fundo branco para as tarefas */
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    cursor: grab;
+    border: 1px solid black; /* Margem fina preta ao redor de cada coluna */
+    word-wrap: break-word;
+    white-space: normal;
+}
+.task-text {
+    flex: 1;
+    word-wrap: break-word;
+    white-space: normal;
+    margin-right: 10px;
+}
+.edit-textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 5px;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    resize: vertical;
+    min-height: 60px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+.controls {
+    text-align: center;
+    margin-bottom: 20px;
+}
+#taskInput {
+    padding: 4px;
+    width: 300px;
+    margin-right: 10px;
+    border: 1px solid #000000;
+}
+button {
+    padding: 8px 12px;
+    background-color: red;
+    border-radius: 10px; /* Bordas arredondadas de 5px */
+    border: 1px solid #000000;
+}
+button:hover {
+    background-color: white; /* Cor de fundo branca ao passar o mouse */
+    color: #000000;
+    border: 1px solid #000000;
+}
+footer {
+    background: red;
+    color: black; /* Define a cor do texto como preto. */
+    padding: 10px; /* Adiciona um preenchimento de 10 pixels em todos os lados. */
+    text-align: center; /* Centraliza o texto dentro do rodapé. */
+    width: 100%; /* Ocupa toda a largura disponível. */
+    font-weight: 700; /* Define a espessura da fonte como negrito. */
+    margin-top: auto;
+}
+/* Estilos para os botões de edição */
+.edit-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    margin-top: 8px;
+}
+.edit-button {
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1px solid #000;
+}
+.edit-delete {
+    background-color:red; /* Vermelho */
+    color: white;
+}
+.edit-delete:hover {
+    background-color: #dc3545; /* Vermelho */
+}
+.edit-save {
+    background-color: #28a745; /* Verde */
+    color: white;
+}
+.edit-save:hover {
+    background-color: #218838;
+}
+.edit-cancel {
+    background-color: #929292;
+    color: white;
+}
+.edit-cancel:hover {
+    background-color: #696969;
+}
+#botaoTarefa {
+    transform: translateY(-22px);
+}

@@ -1,13 +1,31 @@
 package br.com.kanban.kanban.controller;
 
+import br.com.kanban.kanban.model.Usuario;
+import br.com.kanban.kanban.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class LoginController {
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @GetMapping("/")
     public String home() {
         return "login"; // nome do arquivo HTML em templates (sem .html)
     }
+
+    @PostMapping("/login")
+    public String login(@RequestParam String usuario, @RequestParam String senha) {
+        Usuario usuarioEncontrado = usuarioRepository.findByUsuario(usuario);
+
+        if (usuarioEncontrado != null && usuarioEncontrado.getSenha().equals(senha)) {
+            return "redirect:/kanban";
+        }
+
+        return "redirect:/?erro=login";
+    }
 }
+
